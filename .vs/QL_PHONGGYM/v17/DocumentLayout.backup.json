@@ -3,23 +3,7 @@
   "WorkspaceRootPath": "D:\\BMCSDL\\QL_PHONGGYM\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|d:\\bmcsdl\\ql_phonggym\\ql_phonggym\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\modify.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\modify.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|d:\\bmcsdl\\ql_phonggym\\ql_phonggym\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -29,6 +13,22 @@
     {
       "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\modify.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\modify.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|solutionrelative:ql_phonggym\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{591D464A-F262-4FFE-9CDC-9C15B2E3ECD0}|QL_PHONGGYM\\QL_PHONGGYM.csproj|D:\\BMCSDL\\QL_PHONGGYM\\ql_phonggym\\account.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -50,23 +50,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Register.cs",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Register.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Register.cs",
               "ToolTip": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Register.cs",
               "RelativeToolTip": "QL_PHONGGYM\\Register.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAUwEAAAABkAAAAAAAAAA==",
+              "ViewState": "AgIAACoAAAAAAAAAAAAYwDYAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T08:58:39.259Z"
+              "WhenOpened": "2025-09-02T08:58:39.259Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Register.cs [Design]",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Register.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Register.cs",
@@ -77,7 +78,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 5,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Program.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Program.cs",
@@ -101,7 +102,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 6,
               "Title": "Login.cs",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Login.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Login.cs",
@@ -113,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 2,
               "Title": "Login.cs [Design]",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Login.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Login.cs",
@@ -136,20 +137,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Modify.cs",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Modify.cs",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\Modify.cs",
               "ToolTip": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\Modify.cs",
               "RelativeToolTip": "QL_PHONGGYM\\Modify.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-02T07:36:50.703Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-02T07:36:50.703Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "App.config",
               "DocumentMoniker": "D:\\BMCSDL\\QL_PHONGGYM\\QL_PHONGGYM\\App.config",
               "RelativeDocumentMoniker": "QL_PHONGGYM\\App.config",
@@ -157,8 +157,7 @@
               "RelativeToolTip": "QL_PHONGGYM\\App.config",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAABxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-09-02T07:18:34.249Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-09-02T07:18:34.249Z"
             },
             {
               "$type": "Document",
