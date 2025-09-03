@@ -34,7 +34,7 @@ namespace QL_PHONGGYM
             register.ShowDialog();
         }
 
-        Modify modify = new Modify();
+        Modify modify = new Modify();        
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             string userName = UsernameInput.Text;
@@ -49,6 +49,9 @@ namespace QL_PHONGGYM
                 string query = "SELECT USERNAME, PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'AND PASSWORD='" + password + "'";
                 if (modify.Accounts(query).Count != 0)
                 {
+                    string updateSession = "UPDATE ADMIN123.ACCOUNTS SET SessionActive = 1 WHERE USERNAME ='" + userName + "'";
+                    CurrentAccount.Username = userName;//Lưu tên tài khoản hiện tại
+                    modify.AddSession(updateSession);
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     Home home = new Home();
                     home.Show();
