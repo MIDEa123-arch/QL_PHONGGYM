@@ -20,7 +20,7 @@ namespace QL_PHONGGYM
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             string userName = CurrentAccount.Username;
-            string updateSession = "UPDATE ADMIN123.ACCOUNTS SET SessionActive = 0 WHERE USERNAME ='" + userName + "'";
+            string updateSession = "UPDATE QLGYM.ACCOUNTS SET SessionActive = 0 WHERE USERNAME ='" + userName + "'";
             Modify modify = new Modify();
             modify.AddSession(updateSession);
 
@@ -43,7 +43,7 @@ namespace QL_PHONGGYM
         private void SessionTimer_Tick(object sender, EventArgs e)
         {
             string userName = CurrentAccount.Username;
-            string checkSession = "SELECT SessionActive FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'";
+            string checkSession = "SELECT SESSIONACTIVE FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'";
             Modify modify = new Modify();
             int session = modify.CheckSession(checkSession);
             if (session == 0)
