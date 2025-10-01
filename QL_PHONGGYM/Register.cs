@@ -78,7 +78,25 @@ namespace QL_PHONGGYM
             {
                 MessageBox.Show("Tên tài khoản này đã được đăng ký!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }       
+            try
+            {
+                int k = 23;
+
+                string passwordEncrypted = MaHoa.MaHoaNhan(password, k);
+
+                string query = $"INSERT INTO ADMIN123.ACCOUNTS (USERNAME, PASSWORD, EMAIL) " +
+                               $"VALUES ('{userName}','{passwordEncrypted}','{email}')";
+
+                modify.Command(query);
+
+                MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Tên tài khoản này đã được đăng ký!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
 

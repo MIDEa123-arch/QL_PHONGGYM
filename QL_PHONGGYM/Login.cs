@@ -62,7 +62,43 @@ namespace QL_PHONGGYM
                     MessageBox.Show("Đăng nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            try
+            {
+                string query = $"SELECT PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME = '{userName}'";
+                var accounts = modify.Accounts(query);
 
+                if (accounts.Count == 0)
+                {
+                    MessageBox.Show("Tài khoản không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                string passwordEncrypted = accounts[0].PassWord;
+
+                // Giải mã mật khẩu
+                int k = 23;
+                string passwordDecrypted = GiaiMa.GiaiMaNhan(passwordEncrypted, k);
+
+                if (PasswordInput.Text == passwordDecrypted)
+                {
+                    string updateSession = $"UPDATE ADMIN123.ACCOUNTS SET SessionActive = 1 WHERE USERNAME = '{userName}'";
+                    CurrentAccount.Username = userName;
+                    modify.AddSession(updateSession);
+
+                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Home home = new Home();
+                    home.Show();
+                    this.Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Sai mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi khi đăng nhập: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
