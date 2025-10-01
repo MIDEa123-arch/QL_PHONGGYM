@@ -15,9 +15,8 @@ namespace QL_PHONGGYM
             List<char> result = new List<char>();
 
             foreach (char c in input)
-            {
-                char u = char.ToUpper(c);
-                int index = ListChar.IndexOf(u);
+            {               
+                int index = ListChar.IndexOf(c);
                 int newIndex = (index + k) % n;
 
                 result.Add(ListChar[newIndex]);
@@ -33,9 +32,8 @@ namespace QL_PHONGGYM
                 throw new Exception(string.Format("Khóa k={0} không hợp lệ vì gcd({0}, {1}) ≠ 1, không thể giải mã.", k, n));
 
             foreach (char c in input)
-            {
-                char u = char.ToUpper(c);
-                int index = ListChar.IndexOf(u);
+            {             
+                int index = ListChar.IndexOf(c);
                 int newIndex = (index * k) % n;
 
                 result.Add(ListChar[newIndex]);
