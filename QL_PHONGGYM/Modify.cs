@@ -70,6 +70,7 @@ namespace QL_PHONGGYM
             }
             return session;
         }
+<<<<<<< HEAD
         public void Register(string username, string password, int k)
         {
             // Mã hóa mật khẩu
@@ -119,5 +120,20 @@ namespace QL_PHONGGYM
 
             return password == decryptedPassword;
         }
+=======
+
+        public void AddCustomer(string query)
+        {
+            using (OracleConnection oracleConnection = Connection.GetDBConnection())
+            {
+                oracleConnection.Open();
+
+                command = new OracleCommand(query, oracleConnection);
+                command.ExecuteNonQuery(); 
+
+                oracleConnection.Close();
+            }
+        }
+>>>>>>> 2de54cce24070f4934deccfd4c19d7e5c0bdcc3b
     }
 }

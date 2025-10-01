@@ -40,7 +40,9 @@
             this.CCCD = new System.Windows.Forms.TextBox();
             this.TenKH = new System.Windows.Forms.TextBox();
             this.SdtKH = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.GioiTinh = new System.Windows.Forms.ComboBox();
+            this.NgaySinh = new System.Windows.Forms.DateTimePicker();
+            this.AddCustomer = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // LogoutBtn
@@ -152,23 +154,46 @@
             this.SdtKH.Size = new System.Drawing.Size(162, 22);
             this.SdtKH.TabIndex = 11;
             // 
-            // comboBox1
+            // GioiTinh
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
+            this.GioiTinh.FormattingEnabled = true;
+            this.GioiTinh.Items.AddRange(new object[] {
             "Nam",
             "Nu"});
-            this.comboBox1.Location = new System.Drawing.Point(228, 292);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 12;
+            this.GioiTinh.Location = new System.Drawing.Point(228, 292);
+            this.GioiTinh.Name = "GioiTinh";
+            this.GioiTinh.Size = new System.Drawing.Size(121, 24);
+            this.GioiTinh.TabIndex = 12;
+            // 
+            // NgaySinh
+            // 
+            this.NgaySinh.CalendarTitleForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.NgaySinh.CustomFormat = "yyyy-MM-dd";
+            this.NgaySinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.NgaySinh.Location = new System.Drawing.Point(228, 340);
+            this.NgaySinh.Name = "NgaySinh";
+            this.NgaySinh.Size = new System.Drawing.Size(200, 22);
+            this.NgaySinh.TabIndex = 13;
+            // 
+            // AddCustomer
+            // 
+            this.AddCustomer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AddCustomer.Location = new System.Drawing.Point(311, 386);
+            this.AddCustomer.Name = "AddCustomer";
+            this.AddCustomer.Size = new System.Drawing.Size(141, 34);
+            this.AddCustomer.TabIndex = 15;
+            this.AddCustomer.Text = "Xác nhận";
+            this.AddCustomer.UseVisualStyleBackColor = true;
+            this.AddCustomer.Click += new System.EventHandler(this.AddCustomer_Click);
             // 
             // Home
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.AddCustomer);
+            this.Controls.Add(this.NgaySinh);
+            this.Controls.Add(this.GioiTinh);
             this.Controls.Add(this.SdtKH);
             this.Controls.Add(this.TenKH);
             this.Controls.Add(this.CCCD);
@@ -202,6 +227,8 @@
         private System.Windows.Forms.TextBox CCCD;
         private System.Windows.Forms.TextBox TenKH;
         private System.Windows.Forms.TextBox SdtKH;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox GioiTinh;
+        private System.Windows.Forms.DateTimePicker NgaySinh;
+        private System.Windows.Forms.Button AddCustomer;
     }
 }
