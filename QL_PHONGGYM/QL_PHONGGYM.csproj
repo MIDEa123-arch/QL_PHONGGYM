@@ -88,6 +88,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="CurrentAccount.cs" />
+    <Compile Include="Customer.cs" />
     <Compile Include="CustomListAlphabet.cs" />
     <Compile Include="Euclid.cs" />
     <Compile Include="ForgetPassword.cs">

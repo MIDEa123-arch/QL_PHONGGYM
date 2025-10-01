@@ -70,6 +70,19 @@ namespace QL_PHONGGYM
             }
             return session;
         }
+
+        public void AddCustomer(string query)
+        {
+            using (OracleConnection oracleConnection = Connection.GetDBConnection())
+            {
+                oracleConnection.Open();
+
+                command = new OracleCommand(query, oracleConnection);
+                command.ExecuteNonQuery(); 
+
+                oracleConnection.Close();
+            }
+        }
     }
 }
 
