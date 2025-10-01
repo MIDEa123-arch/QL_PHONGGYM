@@ -43,7 +43,7 @@
             this.label1.Size = new System.Drawing.Size(74, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Email";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
+         
             // 
             // label2
             // 
@@ -64,6 +64,7 @@
             this.TakePass.TabIndex = 2;
             this.TakePass.Text = "Lấy lại mật khẩu";
             this.TakePass.UseVisualStyleBackColor = true;
+            this.TakePass.Click += new System.EventHandler(this.TakePass_Click);
             // 
             // EmailBtn
             // 

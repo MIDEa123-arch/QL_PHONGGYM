@@ -70,57 +70,6 @@ namespace QL_PHONGGYM
             }
             return session;
         }
-<<<<<<< HEAD
-        public void Register(string username, string password, int k)
-        {
-            // Mã hóa mật khẩu
-            string encryptedPassword = MaHoa.MaHoaNhan(password, k);
-
-            using (OracleConnection oracleConnection = Connection.GetDBConnection())
-            {
-                oracleConnection.Open();
-                string query = "INSERT INTO ACCOUNT (USERNAME, PASSWORD) VALUES (:username, :password)";
-
-                using (OracleCommand command = new OracleCommand(query, oracleConnection))
-                {
-                    command.Parameters.Add(new OracleParameter(":username", username));
-                    command.Parameters.Add(new OracleParameter(":password", encryptedPassword));
-                    command.ExecuteNonQuery();
-                }
-            }
-        }
-        public bool Login(string username, string password, int k)
-        {
-            string encryptedPassword = null;
-
-            using (OracleConnection oracleConnection = Connection.GetDBConnection())
-            {
-                oracleConnection.Open();
-                string query = "SELECT PASSWORD FROM ACCOUNT WHERE USERNAME = :username";
-
-                using (OracleCommand command = new OracleCommand(query, oracleConnection))
-                {
-                    command.Parameters.Add(new OracleParameter(":username", username));
-
-                    using (OracleDataReader reader = command.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            encryptedPassword = reader.GetString(0);
-                        }
-                    }
-                }
-            }
-
-            if (encryptedPassword == null)
-                return false;
-
-            // Giải mã mật khẩu
-            string decryptedPassword = GiaiMa.GiaiMaNhan(encryptedPassword, k);
-
-            return password == decryptedPassword;
-        }
-=======
 
         public void AddCustomer(string query)
         {
@@ -128,12 +77,12 @@ namespace QL_PHONGGYM
             {
                 oracleConnection.Open();
 
-                command = new OracleCommand(query, oracleConnection);
-                command.ExecuteNonQuery(); 
-
-                oracleConnection.Close();
+                using (OracleCommand command = new OracleCommand(query, oracleConnection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
         }
->>>>>>> 2de54cce24070f4934deccfd4c19d7e5c0bdcc3b
     }
 }
+

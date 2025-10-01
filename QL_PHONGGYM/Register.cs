@@ -57,9 +57,10 @@ namespace QL_PHONGGYM
                 MessageBox.Show("Email không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
+            string passwordEncrypted = MaHoa.MaHoaNhan(password, 23);
+            string emailEncrypted = MaHoa.MaHoaNhan(email, 23);
             // Kiểm tra email tồn tại
-            if (modify.Accounts($"SELECT * FROM ADMIN123.ACCOUNTS WHERE EMAIL = '{email}'").Count != 0)
+            if (modify.Accounts($"SELECT * FROM ADMIN123.ACCOUNTS WHERE EMAIL = '{emailEncrypted}'").Count != 0)
             {
                 MessageBox.Show("Email đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -68,29 +69,11 @@ namespace QL_PHONGGYM
             // Thêm tài khoản
             try
             {
-                string query = $"INSERT INTO ADMIN123.ACCOUNTS (USERNAME, PASSWORD, EMAIL) VALUES ('{userName}','{password}','{email}')";
+                string query = $"INSERT INTO ADMIN123.ACCOUNTS (USERNAME, PASSWORD, EMAIL, SESSIONACTIVE) VALUES ('{userName}','{passwordEncrypted}','{emailEncrypted}', 0)";
                 modify.Command(query);
 
                 MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close(); // quay về login
-            }
-            catch
-            {
-                MessageBox.Show("Tên tài khoản này đã được đăng ký!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            try
-            {
-                int k = 23;
-
-                string passwordEncrypted = MaHoa.MaHoaNhan(password, k);
-
-                string query = $"INSERT INTO ADMIN123.ACCOUNTS (USERNAME, PASSWORD, EMAIL) " +
-                               $"VALUES ('{userName}','{passwordEncrypted}','{email}')";
-
-                modify.Command(query);
-
-                MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
             }
             catch
             {

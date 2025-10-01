@@ -17,7 +17,7 @@ namespace QL_PHONGGYM
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void TakePass_Click(object sender, EventArgs e)
         {
 
         }

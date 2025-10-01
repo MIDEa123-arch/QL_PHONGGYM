@@ -34,19 +34,21 @@ namespace QL_PHONGGYM
             register.ShowDialog();
         }
 
-        Modify modify = new Modify();        
+        Modify modify = new Modify();
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             string userName = UsernameInput.Text;
             string password = PasswordInput.Text;
 
-            if(userName.Trim() == "") { MessageBox.Show("Vui lòng nhập tên tài khoản!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);}
+            if (userName.Trim() == "") { MessageBox.Show("Vui lòng nhập tên tài khoản!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
             else if (password.Trim() == "")
             {
-                MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);}
+                MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else
             {
-                string query = "SELECT USERNAME, PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'AND PASSWORD='" + password + "'";
+                string passwordEncrypted = MaHoa.MaHoaNhan(password, 23);
+                string query = "SELECT USERNAME, PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'AND PASSWORD='" + passwordEncrypted + "'";
                 if (modify.Accounts(query).Count != 0)
                 {
                     string updateSession = "UPDATE ADMIN123.ACCOUNTS SET SessionActive = 1 WHERE USERNAME ='" + userName + "'";
@@ -58,47 +60,11 @@ namespace QL_PHONGGYM
                     this.Hide();
                 }
                 else
-                {                    
+                {
                     MessageBox.Show("Đăng nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            try
-            {
-                string query = $"SELECT PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME = '{userName}'";
-                var accounts = modify.Accounts(query);
 
-                if (accounts.Count == 0)
-                {
-                    MessageBox.Show("Tài khoản không tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                string passwordEncrypted = accounts[0].PassWord;
-
-                // Giải mã mật khẩu
-                int k = 23;
-                string passwordDecrypted = GiaiMa.GiaiMaNhan(passwordEncrypted, k);
-
-                if (PasswordInput.Text == passwordDecrypted)
-                {
-                    string updateSession = $"UPDATE ADMIN123.ACCOUNTS SET SessionActive = 1 WHERE USERNAME = '{userName}'";
-                    CurrentAccount.Username = userName;
-                    modify.AddSession(updateSession);
-
-                    MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Home home = new Home();
-                    home.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Sai mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Có lỗi khi đăng nhập: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
     }
 }
