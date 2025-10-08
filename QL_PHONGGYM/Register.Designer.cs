@@ -34,8 +34,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.RepassInput = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.EmailInput = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
             this.RegisterBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -90,23 +88,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "Nhập lại mật khẩu";
             // 
-            // EmailInput
-            // 
-            this.EmailInput.Location = new System.Drawing.Point(375, 302);
-            this.EmailInput.Name = "EmailInput";
-            this.EmailInput.Size = new System.Drawing.Size(233, 22);
-            this.EmailInput.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(186, 298);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(60, 25);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Email";
-            // 
             // RegisterBtn
             // 
             this.RegisterBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -126,8 +107,6 @@
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.RegisterBtn);
-            this.Controls.Add(this.EmailInput);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.RepassInput);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.PassInput);
@@ -149,8 +128,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox RepassInput;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox EmailInput;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button RegisterBtn;
     }
 }

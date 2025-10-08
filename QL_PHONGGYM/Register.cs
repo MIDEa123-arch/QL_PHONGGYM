@@ -1,13 +1,15 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using QL_PHONGGYM.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace QL_PHONGGYM
 {
@@ -22,19 +24,13 @@ namespace QL_PHONGGYM
         {
             return Regex.IsMatch(Acc, "^[a-zA-Z0-9]{6,30}$");
         }
-
-        public bool checkEmail(string email)//check email
-        {
-            return Regex.IsMatch(email, @"^[\w]{3,30}@gmail.com(.vn|)$");
-        }
-
-        Modify modify = new Modify();
+       
         private void RegisterBtn_Click(object sender, EventArgs e)
         {
             string userName = UsernameInput.Text.Trim();
             string password = PassInput.Text.Trim();
-            string confirmPass = RepassInput.Text.Trim();
-            string email = EmailInput.Text.Trim();
+            string confirmPass = RepassInput.Text.Trim();      
+          
 
             // Validate dữ liệu
             if (!checkAccount(userName))
@@ -51,34 +47,26 @@ namespace QL_PHONGGYM
             {
                 MessageBox.Show("Mật khẩu nhập lại không khớp!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-            }
-            if (!checkEmail(email))
-            {
-                MessageBox.Show("Email không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            string passwordEncrypted = MaHoa.MaHoaNhan(password, 23);
-            string emailEncrypted = MaHoa.MaHoaNhan(email, 23);
-            // Kiểm tra email tồn tại
-            if (modify.Accounts($"SELECT * FROM ADMIN123.ACCOUNTS WHERE EMAIL = '{emailEncrypted}'").Count != 0)
-            {
-                MessageBox.Show("Email đã tồn tại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            }                                          
 
             // Thêm tài khoản
             try
             {
-                string query = $"INSERT INTO ADMIN123.ACCOUNTS (USERNAME, PASSWORD, EMAIL, SESSIONACTIVE) VALUES ('{userName}','{passwordEncrypted}','{emailEncrypted}', 0)";
-                modify.Command(query);
+                string EncrypPassword = MaHoa.MaHoaNhan(password, 23);
+                UserDAL userDAL = new UserDAL();
+                userDAL.CreateUser(userName, EncrypPassword);
 
                 MessageBox.Show("Đăng ký thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close(); // quay về login
             }
-            catch
+            catch (OracleException ex)
             {
-                MessageBox.Show("Tên tài khoản này đã được đăng ký!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ex.Number == 1920) // ORA-01920 user exists
+                    MessageBox.Show("Tên tài khoản này đã được đăng ký!");
+                else
+                    MessageBox.Show("Lỗi: " + ex.Message);
             }
+
         }
     }
 }

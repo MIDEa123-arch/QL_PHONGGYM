@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Oracle.ManagedDataAccess.Client;
+using QL_PHONGGYM.DAL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Oracle.ManagedDataAccess.Client; 
 
 namespace QL_PHONGGYM
 {
@@ -33,8 +36,7 @@ namespace QL_PHONGGYM
             Register register = new Register();
             register.ShowDialog();
         }
-
-        Modify modify = new Modify();
+     
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             string userName = UsernameInput.Text;
@@ -47,24 +49,29 @@ namespace QL_PHONGGYM
             }
             else
             {
-                string passwordEncrypted = MaHoa.MaHoaNhan(password, 23);
-                string query = "SELECT USERNAME, PASSWORD FROM ADMIN123.ACCOUNTS WHERE USERNAME ='" + userName + "'AND PASSWORD='" + passwordEncrypted + "'";
-                if (modify.Accounts(query).Count != 0)
+                UserDAL userDAL = new UserDAL();
+                try
                 {
-                    string updateSession = "UPDATE ADMIN123.ACCOUNTS SET SessionActive = 1 WHERE USERNAME ='" + userName + "'";
-                    CurrentAccount.Username = userName;//Lưu tên tài khoản hiện tại
-                    modify.AddSession(updateSession);
+                    string EncrypPassword = MaHoa.MaHoaNhan(password, 23);
+
+                    var conn = userDAL.LoginUser(userName, EncrypPassword);
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    Home home = new Home();
-                    home.Show();
+
+                    Home home = new Home(userName, conn);
                     this.Hide();
+                    home.ShowDialog();
+                    this.Close();
                 }
-                else
+                catch (OracleException ex)
                 {
-                    MessageBox.Show("Đăng nhập thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (ex.Number == 1017) // ORA-01017: invalid username/password
+                        MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else if (ex.Number == 28000) // ORA-28000: user locked
+                        MessageBox.Show("Tài khoản đang bị khóa. Liên hệ admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-
-        }
+        }        
     }
 }

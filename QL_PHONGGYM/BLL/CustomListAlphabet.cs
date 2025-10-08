@@ -16,11 +16,8 @@ namespace QL_PHONGGYM
             for (char c = '0'; c <= '9'; c++)
                 list.Add(c);
             for (char c = 'a'; c <= 'z'; c++)
-                list.Add(c);
-            string specialChars = "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-            foreach (char c in specialChars)
-                list.Add(c);
-
+                list.Add(c);         
+            
             return list;
 
         }
