@@ -25,19 +25,6 @@ namespace QL_PHONGGYM.DAL
             OracleConnection conn = new OracleConnection(userConnStr);
 
             return conn;
-        }
-
-        //Ham chay lenh sql
-        public static void ExcuteQuery(string query, string usernmae, string password)
-        {
-            using (var conn = GetConnectionUser(usernmae, password))
-            {
-                conn.Open();
-                using (var cmd = new OracleCommand(query, conn))
-                {
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }   
+        }       
     }
 }
