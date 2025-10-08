@@ -88,6 +88,7 @@
     <Compile Include="BLL\CustomListAlphabet.cs" />
     <Compile Include="BLL\Euclid.cs" />
     <Compile Include="DAL\ConnectionHelper.cs" />
+    <Compile Include="DAL\GetData.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="ForgetPassword.cs">
       <SubType>Form</SubType>
