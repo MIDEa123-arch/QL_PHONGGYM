@@ -85,9 +85,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\CryptoBLL.cs" />
     <Compile Include="BLL\CustomListAlphabet.cs" />
     <Compile Include="BLL\Euclid.cs" />
     <Compile Include="DAL\ConnectionHelper.cs" />
+    <Compile Include="DAL\CryptoDAL.cs" />
     <Compile Include="DAL\GetData.cs" />
     <Compile Include="DAL\UserDAL.cs" />
     <Compile Include="ForgetPassword.cs">
@@ -110,6 +112,12 @@
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
     <Compile Include="BLL\MaHoa.cs" />
+    <Compile Include="MahoaGiaima.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MahoaGiaima.Designer.cs">
+      <DependentUpon>MahoaGiaima.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.cs">
@@ -126,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MahoaGiaima.resx">
+      <DependentUpon>MahoaGiaima.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
