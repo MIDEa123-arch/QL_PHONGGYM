@@ -2,9 +2,11 @@
 using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Oracle.ManagedDataAccess.Client;
 
 namespace QL_PHONGGYM.DAL
 {
@@ -16,17 +18,15 @@ namespace QL_PHONGGYM.DAL
             {
                 conn.Open();
 
-                using (var cmd = conn.CreateCommand())
+                using (var cmd = new OracleCommand("PROC_CREATE_USER", conn))
                 {
-                    cmd.CommandText = $"create user {username} identified by {password}";
-                    cmd.ExecuteNonQuery();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.Add("p_username", OracleDbType.Varchar2).Value = username;
+                    cmd.Parameters.Add("p_password", OracleDbType.Varchar2).Value = password;
 
-                    cmd.CommandText = $"grant create session to {username}";
-                    cmd.ExecuteNonQuery();
-
-                    cmd.CommandText = $"grant app_user_role to {username}";
                     cmd.ExecuteNonQuery();
                 }
+
             }
         }
 
@@ -36,7 +36,7 @@ namespace QL_PHONGGYM.DAL
             {
                 var conn = ConnectionHelper.GetConnectionUser(username, password);
                 conn.Open();
-                return conn; 
+                return conn;
             }
             catch (OracleException ex)
             {
@@ -45,35 +45,24 @@ namespace QL_PHONGGYM.DAL
         }
 
         public void LogOutUser(string username)
-        {
-            using (var adminConn = ConnectionHelper.GetConnection())
+        {           
+            using (var conn = ConnectionHelper.GetConnection())
             {
-                adminConn.Open();
+                conn.Open();
 
-                using (var cmd = adminConn.CreateCommand())
+                using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = $"SELECT sid, serial# FROM v$session WHERE username = '{username.ToUpper()}'";//bảng session của user
-                    using (var r = cmd.ExecuteReader()) // đọc từng dòng trong bảng
-                    {
-                        List<string> sessions = new List<string>();
+                    cmd.CommandText = "PROC_LOGOUT_USER";
+                    cmd.CommandType = CommandType.StoredProcedure;
 
-                        while (r.Read()) //khi dòng còn dữ liệu
-                        {
-                            sessions.Add($"{r["SID"]},{r["SERIAL#"]}");
-                        }
+                    cmd.Parameters.Add("p_username", OracleDbType.Varchar2).Value = username;
 
-                        foreach (var s in sessions)
-                        {
-                            using (var killCmd = adminConn.CreateCommand())
-                            {
-                                killCmd.CommandText = $"ALTER SYSTEM KILL SESSION '{s}' IMMEDIATE";
-                                killCmd.ExecuteNonQuery();
-                            }
-                        }
-                    }    
+                    cmd.ExecuteNonQuery();
                 }
-
-            }    
+            }
         }
+
     }
+
 }
+

@@ -53,7 +53,6 @@ namespace QL_PHONGGYM
                 try
                 {
                     string EncrypPassword = MaHoa.MaHoaNhan(password, 23);
-
                     var conn = userDAL.LoginUser(userName, EncrypPassword);
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
