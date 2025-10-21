@@ -17,35 +17,7 @@ namespace QL_PHONGGYM
             currentUser = userName;
             conn = connection;
         }
-
-        private void Home_Load(object sender, EventArgs e)
-        {            
-            LopHocTable.Visible = false;
-        }
-        
-        private void LoadLopHoc()
-        {
-            try
-            {                                               
-                DataTable dt = GetData.TableLopHoc(conn);
-              
-                LopHocTable.DataSource = null;   
-                LopHocTable.DataSource = dt;     
-                LopHocTable.ClearSelection();   
-                LopHocTable.Refresh();           
-                LopHocTable.Visible = true;      
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void ViewListBtn_Click(object sender, EventArgs e)
-        {
-            LoadLopHoc(); // Click nút hiển thị bảng
-        }
-
+                       
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             try
