@@ -6,7 +6,6 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Oracle.ManagedDataAccess.Client;
 
 namespace QL_PHONGGYM.DAL
 {
