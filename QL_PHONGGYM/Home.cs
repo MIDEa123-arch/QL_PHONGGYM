@@ -25,8 +25,8 @@ namespace QL_PHONGGYM
         {
             if (conn != null && conn.State == ConnectionState.Open)
             {
-                LoadData();       // Tải DataGridView
                 LoadComboBoxes();
+                LoadData();
             }
             else
             {
@@ -41,7 +41,6 @@ namespace QL_PHONGGYM
             cbo_gt.Items.AddRange(new object[] {
                     "Nam",
                     "Nữ",
-                    "Khác"
                 });
         }
 
@@ -50,111 +49,41 @@ namespace QL_PHONGGYM
         {
             try
             {
-              
-                string procName = "ADMIN123.SP_XEMKHACHHANG";
-                OracleParameter[] parameters = null;
-                DataTable dt = GetData.GetDataTableFromProcedure(procName, parameters, this.conn);
+                DataTable dtLoaiKH = cbo_lkh.DataSource as DataTable;
+                DataTable dtKhachHang = GetData.GetKhachHangWithLoaiKH(conn, dtLoaiKH);
 
-              
+                dataGridView1.DataSource = dtKhachHang;
 
-                // 1. Tạo bảng tra cứu Tên Loại KH từ DataSource của ComboBox
-        
-                var loaiKhLookup = new Dictionary<int, string>();
-                if (cbo_lkh.DataSource is DataTable dtLoaiKH)
-                {
-                    foreach (DataRow dr in dtLoaiKH.Rows)
-                    {
-                     
-                        if (dr["MALOAIKH"] != DBNull.Value)
-                        {
-                            loaiKhLookup[Convert.ToInt32(dr["MALOAIKH"])] = dr["TENLOAI"].ToString();
-                        }
-                    }
-                }
-
-               
-                dt.Columns.Add("STT", typeof(int));
-                dt.Columns.Add("TenLoaiKH", typeof(string));
-
-               
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    DataRow row = dt.Rows[i];
-
-                
-                    row["STT"] = i + 1;
-
-                  
-                    string tenLoai = "Chưa có"; 
-                    if (row["MaLoaiKH"] != DBNull.Value)
-                    {
-                        int maLoai = Convert.ToInt32(row["MaLoaiKH"]);
-                        if (loaiKhLookup.ContainsKey(maLoai))
-                        {
-                            tenLoai = loaiKhLookup[maLoai];
-                        }
-                        else
-                        {
-                            tenLoai = "Lỗi tra cứu"; 
-                        }
-                    }
-                    row["TenLoaiKH"] = tenLoai;
-                }
-
-                
-                dataGridView1.DataSource = dt;
-
-           
-
-                // Ẩn các cột Mã gốc
-               
+                // Ẩn các cột gốc
                 if (dataGridView1.Columns.Contains("MaKH"))
-                {
                     dataGridView1.Columns["MaKH"].Visible = false;
-                }
                 if (dataGridView1.Columns.Contains("MaLoaiKH"))
-                {
                     dataGridView1.Columns["MaLoaiKH"].Visible = false;
-                }
 
-                // Đặt tên và vị trí cho các cột mới
+                // Thiết lập header
                 if (dataGridView1.Columns.Contains("STT"))
                 {
                     dataGridView1.Columns["STT"].HeaderText = "STT";
-                    dataGridView1.Columns["STT"].DisplayIndex = 0; 
-                    dataGridView1.Columns["STT"].Width = 60; 
+                    dataGridView1.Columns["STT"].DisplayIndex = 0;
+                    dataGridView1.Columns["STT"].Width = 60;
                 }
                 if (dataGridView1.Columns.Contains("TenLoaiKH"))
-                {
                     dataGridView1.Columns["TenLoaiKH"].HeaderText = "Loại Khách Hàng";
-                  
-                }
                 if (dataGridView1.Columns.Contains("TenKH"))
-                {
                     dataGridView1.Columns["TenKH"].HeaderText = "Tên Khách Hàng";
-                }
-
                 if (dataGridView1.Columns.Contains("NgaySinh"))
-                {
                     dataGridView1.Columns["NgaySinh"].HeaderText = "Ngày Sinh";
-                }
                 if (dataGridView1.Columns.Contains("SDT"))
-                {
                     dataGridView1.Columns["SDT"].HeaderText = "Số Điện Thoại";
-                }
-
                 if (dataGridView1.Columns.Contains("GioiTinh"))
-                {
                     dataGridView1.Columns["GioiTinh"].HeaderText = "Giới Tính";
-                }
-
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi tải dữ liệu khách hàng: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         // 3. HÀM TẢI COMBOBOX
         private void LoadComboBoxes()
@@ -165,12 +94,12 @@ namespace QL_PHONGGYM
 
                 DataRow dr = dtLoaiKH.NewRow();
                 dr["TENLOAI"] = "-- Không chọn --";
-                dr["MALOAIKH"] = DBNull.Value; 
+                dr["MALOAIKH"] = DBNull.Value;
                 dtLoaiKH.Rows.InsertAt(dr, 0);
 
                 cbo_lkh.DataSource = dtLoaiKH;
-                cbo_lkh.DisplayMember = "TENLOAI"; 
-                cbo_lkh.ValueMember = "MALOAIKH";  
+                cbo_lkh.DisplayMember = "TENLOAI";
+                cbo_lkh.ValueMember = "MALOAIKH";
             }
             catch (Exception ex)
             {
@@ -219,9 +148,18 @@ namespace QL_PHONGGYM
                     // Lưu SĐT gốc (plaintext) vào biến tạm
                     originalSdtForUpdate = txt_sdt.Text;
                 }
+                catch (ApplicationException ex)
+                {
+                    MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi chọn xem chi tiết: " + ex.Message);
+                    MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -280,9 +218,18 @@ namespace QL_PHONGGYM
                     MessageBox.Show("Thêm thất bại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            catch (ApplicationException ex)
+            {
+                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi thêm: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -322,9 +269,17 @@ namespace QL_PHONGGYM
                         MessageBox.Show("Xóa thất bại. (Không tìm thấy SĐT hoặc lỗi CSDL).", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                catch (ApplicationException ex)
+                {                    
+                    MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);                    
+                }
+                catch (OracleException ex)
+                {
+                    MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi xóa: " + ex.Message, "Lỗi Nghiêm Trọng", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -389,9 +344,18 @@ namespace QL_PHONGGYM
                     MessageBox.Show("Cập nhật thất bại. (Không tìm thấy SĐT gốc hoặc lỗi CSDL).", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            catch (ApplicationException ex)
+            {            
+                MessageBox.Show(ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+              
+            }
+            catch (OracleException ex)
+            {
+                MessageBox.Show("Lỗi Oracle: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi khi sửa: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Lỗi: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -414,7 +378,7 @@ namespace QL_PHONGGYM
         private void LogoutBtn_Click(object sender, EventArgs e)
         {
             try
-            {
+            {               
                 UserDAL userDAL = new UserDAL();
                 userDAL.LogOutUser(currentUser);
 
@@ -435,6 +399,6 @@ namespace QL_PHONGGYM
             }
         }
 
-      
+
     }
 }

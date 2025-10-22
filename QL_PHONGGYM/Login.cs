@@ -63,12 +63,12 @@ namespace QL_PHONGGYM
                 }
                 catch (OracleException ex)
                 {
+                    if (ex.Number == 2391)
+                        MessageBox.Show("Tài khoản của bạn đã bị đăng nhập ở nơi khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     if (ex.Number == 1017) // ORA-01017: invalid username/password
                         MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else if (ex.Number == 28000) // ORA-28000: user locked
-                        MessageBox.Show("Tài khoản đang bị khóa. Liên hệ admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    else
-                        MessageBox.Show("Lỗi Oracle: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Tài khoản đang bị khóa. Liên hệ admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
                 }
             }
         }        

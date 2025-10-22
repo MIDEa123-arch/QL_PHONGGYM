@@ -21,10 +21,23 @@ namespace QL_PHONGGYM.DAL
 
         public static OracleConnection GetConnectionUser(string username, string password)
         {
-            string userConnStr = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=100.115.143.84)(PORT=1521))(CONNECT_DATA=(SID=orcl2)));User Id={username};Password={password};";
-            OracleConnection conn = new OracleConnection(userConnStr);
+            string host = "100.115.143.84";
+            string port = "1521";
+            string sid = "orcl2";
 
+            string connStr; 
+            if (username.ToUpper() == "SYS")
+            {
+                connStr = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={host})(PORT={port}))(CONNECT_DATA=(SID={sid})));User Id={username};Password={password};DBA Privilege=SYSDBA;";
+            }
+            else
+            {
+                connStr = $"Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST={host})(PORT={port}))(CONNECT_DATA=(SID={sid})));User Id={username};Password={password};";
+            }
+
+            OracleConnection conn = new OracleConnection(connStr);
             return conn;
-        }       
+        }
+
     }
 }
