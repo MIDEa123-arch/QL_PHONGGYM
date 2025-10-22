@@ -1,8 +1,8 @@
 ![Oracle Logo](https://raw.githubusercontent.com/oracle/dotnet-db-samples/master/images/oracle-nuget.png) 
-# Oracle.ManagedDataAccess 23.9.1
+# Oracle.ManagedDataAccess 23.26.0
 Release Notes for Oracle Data Provider for .NET, Managed Driver NuGet Package
 
-July 2025
+October 2025
 
 Managed Oracle Data Provider for .NET (ODP.NET) features optimized ADO.NET data access to the Oracle database for .NET Framework and is 100% managed code. ODP.NET allows developers to take advantage of advanced Oracle database functionality, including AI vectors, Real Application Clusters, Application Continuity, JSON Relational Duality, and Fast Connection Failover. 
 
@@ -17,10 +17,12 @@ This document provides information that supplements the [Oracle Data Provider fo
 * [Email Newsletter Sign Up](https://go.oracle.com/LP=28277?elqCampaignId=124071&nsl=onetdev)
 
 ## New Features
-* None
+* External DST File Support
+* New OpenTelemetry Attribute: Rows Fetched From DB
 
 ## Bug Fixes since Oracle.ManagedDataAccess 23.9.0
-* Bug 38161905 - INCORRECT CODE GENERATED FROM VISUAL STUDIO TOOLBOX COMPONENTS
+* Bug 38176130 - ORA-01013 ENCOUNTERED WHEN OPENTELEMETRY IS ENABLED WITH SQL ID TRACING
+* Bug 38075265 - ORACLEDATAADAPTER.FILLSCHEMA DOES NOT RECOGNIZE IDENITITY PK COLUMNS AS PK
 
 ## Installation Changes
 The following app/web.config entries are added when installing the managed ODP.NET NuGet package to your application:
