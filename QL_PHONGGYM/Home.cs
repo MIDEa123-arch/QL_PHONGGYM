@@ -3,7 +3,7 @@ using QL_PHONGGYM.DAL;
 using System;
 using System.Data;
 using System.Windows.Forms;
-
+using System.Collections.Generic;
 namespace QL_PHONGGYM
 {
     public partial class Home : Form
@@ -26,7 +26,7 @@ namespace QL_PHONGGYM
             if (conn != null && conn.State == ConnectionState.Open)
             {
                 LoadData();       // Tải DataGridView
-                LoadComboBoxes(); // Tải 2 ComboBox
+                LoadComboBoxes();
             }
             else
             {
@@ -50,11 +50,105 @@ namespace QL_PHONGGYM
         {
             try
             {
-                // Tên proc phải khớp (ví dụ: ADMIN123.SP_XEMKHACHHANG)
+              
                 string procName = "ADMIN123.SP_XEMKHACHHANG";
                 OracleParameter[] parameters = null;
                 DataTable dt = GetData.GetDataTableFromProcedure(procName, parameters, this.conn);
+
+              
+
+                // 1. Tạo bảng tra cứu Tên Loại KH từ DataSource của ComboBox
+        
+                var loaiKhLookup = new Dictionary<int, string>();
+                if (cbo_lkh.DataSource is DataTable dtLoaiKH)
+                {
+                    foreach (DataRow dr in dtLoaiKH.Rows)
+                    {
+                     
+                        if (dr["MALOAIKH"] != DBNull.Value)
+                        {
+                            loaiKhLookup[Convert.ToInt32(dr["MALOAIKH"])] = dr["TENLOAI"].ToString();
+                        }
+                    }
+                }
+
+               
+                dt.Columns.Add("STT", typeof(int));
+                dt.Columns.Add("TenLoaiKH", typeof(string));
+
+               
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    DataRow row = dt.Rows[i];
+
+                
+                    row["STT"] = i + 1;
+
+                  
+                    string tenLoai = "Chưa có"; 
+                    if (row["MaLoaiKH"] != DBNull.Value)
+                    {
+                        int maLoai = Convert.ToInt32(row["MaLoaiKH"]);
+                        if (loaiKhLookup.ContainsKey(maLoai))
+                        {
+                            tenLoai = loaiKhLookup[maLoai];
+                        }
+                        else
+                        {
+                            tenLoai = "Lỗi tra cứu"; 
+                        }
+                    }
+                    row["TenLoaiKH"] = tenLoai;
+                }
+
+                
                 dataGridView1.DataSource = dt;
+
+           
+
+                // Ẩn các cột Mã gốc
+               
+                if (dataGridView1.Columns.Contains("MaKH"))
+                {
+                    dataGridView1.Columns["MaKH"].Visible = false;
+                }
+                if (dataGridView1.Columns.Contains("MaLoaiKH"))
+                {
+                    dataGridView1.Columns["MaLoaiKH"].Visible = false;
+                }
+
+                // Đặt tên và vị trí cho các cột mới
+                if (dataGridView1.Columns.Contains("STT"))
+                {
+                    dataGridView1.Columns["STT"].HeaderText = "STT";
+                    dataGridView1.Columns["STT"].DisplayIndex = 0; 
+                    dataGridView1.Columns["STT"].Width = 60; 
+                }
+                if (dataGridView1.Columns.Contains("TenLoaiKH"))
+                {
+                    dataGridView1.Columns["TenLoaiKH"].HeaderText = "Loại Khách Hàng";
+                  
+                }
+                if (dataGridView1.Columns.Contains("TenKH"))
+                {
+                    dataGridView1.Columns["TenKH"].HeaderText = "Tên Khách Hàng";
+                }
+
+                if (dataGridView1.Columns.Contains("NgaySinh"))
+                {
+                    dataGridView1.Columns["NgaySinh"].HeaderText = "Ngày Sinh";
+                }
+                if (dataGridView1.Columns.Contains("SDT"))
+                {
+                    dataGridView1.Columns["SDT"].HeaderText = "Số Điện Thoại";
+                }
+
+                if (dataGridView1.Columns.Contains("GioiTinh"))
+                {
+                    dataGridView1.Columns["GioiTinh"].HeaderText = "Giới Tính";
+                }
+
+
             }
             catch (Exception ex)
             {
