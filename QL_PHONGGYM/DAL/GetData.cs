@@ -23,8 +23,6 @@ namespace QL_PHONGGYM.DAL
                     {
                         cmd.Parameters.AddRange(inParameters);
                     }
-
-                   
                     cmd.Parameters.Add(new OracleParameter("p_Cursor", OracleDbType.RefCursor, ParameterDirection.Output));
 
                     using (OracleDataAdapter adapter = new OracleDataAdapter(cmd))
