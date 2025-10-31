@@ -18,6 +18,7 @@ namespace QL_PHONGGYM
         public Login()
         {
             InitializeComponent();
+            CenterToScreen();
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -36,13 +37,16 @@ namespace QL_PHONGGYM
             Register register = new Register();
             register.ShowDialog();
         }
-     
+
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             string userName = UsernameInput.Text;
             string password = PasswordInput.Text;
 
-            if (userName.Trim() == "") { MessageBox.Show("Vui lòng nhập tên tài khoản!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning); }
+            if (userName.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tên tài khoản!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
             else if (password.Trim() == "")
             {
                 MessageBox.Show("Vui lòng nhập mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -54,23 +58,27 @@ namespace QL_PHONGGYM
                 {
                     string EncrypPassword = MaHoa.MaHoaNhan(password, 23);
                     var conn = userDAL.LoginUser(userName, EncrypPassword);
+
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                    // 👉 Tạo và hiển thị form Home full màn hình
                     Home home = new Home(userName, conn);
-                    this.Hide();
-                    home.ShowDialog();
-                    this.Close();
+                    home.WindowState = FormWindowState.Maximized;  // full màn hình
+                    this.Hide();                                   // ẩn form login
+                    home.Show();                                   // dùng Show() thay vì ShowDialog()
                 }
                 catch (OracleException ex)
                 {
                     if (ex.Number == 2391)
                         MessageBox.Show("Tài khoản của bạn đã bị đăng nhập ở nơi khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (ex.Number == 1017) // ORA-01017: invalid username/password
+                    else if (ex.Number == 1017) // ORA-01017: invalid username/password
                         MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else if (ex.Number == 28000) // ORA-28000: user locked
-                        MessageBox.Show("Tài khoản đang bị khóa. Liên hệ admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
+                        MessageBox.Show("Tài khoản đang bị khóa. Liên hệ admin!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    else
+                        MessageBox.Show("Lỗi Oracle: " + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-        }        
+        }
     }
 }

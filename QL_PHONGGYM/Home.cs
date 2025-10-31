@@ -4,6 +4,7 @@ using System;
 using System.Data;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using QL_PHONGGYM.All_User_Control;
 namespace QL_PHONGGYM
 {
     public partial class Home : Form
@@ -17,6 +18,7 @@ namespace QL_PHONGGYM
         public Home(string userName, OracleConnection connection)
         {
             InitializeComponent();
+            CenterToScreen();
             currentUser = userName;
             conn = connection;
         }
@@ -48,8 +50,12 @@ namespace QL_PHONGGYM
         private void btn_add_Click(object sender, EventArgs e)
         {
             panelmoving.Left = btn_add.Left = 50;
-            uC_AddCustomer1.Visible = true;
-            uC_AddCustomer1.BringToFront();
+            panelMain.Controls.Clear(); // Xóa nội dung panel trước đó
+
+            UC_AddCustomer uc = new UC_AddCustomer();
+            uc.Dock = DockStyle.Fill; // Cho full panel
+            panelMain.Controls.Add(uc);
+            uc.BringToFront();
         }
 
         private void Home_Load(object sender, EventArgs e)
