@@ -21,9 +21,9 @@
             this.btn_checkout = new Guna.UI2.WinForms.Guna2Button();
             this.btn_add = new Guna.UI2.WinForms.Guna2Button();
             this.panelMain = new System.Windows.Forms.Panel();
+            this.uC_AddCustomer1 = new QL_PHONGGYM.All_User_Control.UC_AddCustomer();
             this.panelmoving = new System.Windows.Forms.Panel();
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
-            this.uC_AddCustomer1 = new QL_PHONGGYM.All_User_Control.UC_AddCustomer();
             this.panel1.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.SuspendLayout();
@@ -114,6 +114,16 @@
             this.panelMain.Size = new System.Drawing.Size(1887, 794);
             this.panelMain.TabIndex = 2;
             // 
+            // uC_AddCustomer1
+            // 
+            this.uC_AddCustomer1.BackColor = System.Drawing.Color.White;
+            this.uC_AddCustomer1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.uC_AddCustomer1.Location = new System.Drawing.Point(-2, -2);
+            this.uC_AddCustomer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.uC_AddCustomer1.Name = "uC_AddCustomer1";
+            this.uC_AddCustomer1.Size = new System.Drawing.Size(1882, 852);
+            this.uC_AddCustomer1.TabIndex = 0;
+            // 
             // panelmoving
             // 
             this.panelmoving.BackColor = System.Drawing.Color.Cyan;
@@ -125,16 +135,6 @@
             // guna2Elipse1
             // 
             this.guna2Elipse1.TargetControl = this;
-            // 
-            // uC_AddCustomer1
-            // 
-            this.uC_AddCustomer1.BackColor = System.Drawing.Color.White;
-            this.uC_AddCustomer1.Font = new System.Drawing.Font("Ravie", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.uC_AddCustomer1.Location = new System.Drawing.Point(-2, -2);
-            this.uC_AddCustomer1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.uC_AddCustomer1.Name = "uC_AddCustomer1";
-            this.uC_AddCustomer1.Size = new System.Drawing.Size(1882, 852);
-            this.uC_AddCustomer1.TabIndex = 0;
             // 
             // Home
             // 

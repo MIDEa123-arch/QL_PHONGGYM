@@ -13,7 +13,7 @@ namespace QL_PHONGGYM
         private OracleConnection conn;
 
         // Biến tạm để lưu SĐT gốc (dùng cho Sửa/Xóa)
-        private string originalSdtForUpdate;
+        //private string originalSdtForUpdate;
 
         public Home(string userName, OracleConnection connection)
         {
@@ -52,7 +52,7 @@ namespace QL_PHONGGYM
             panelmoving.Left = btn_add.Left = 50;
             panelMain.Controls.Clear(); // Xóa nội dung panel trước đó
 
-            UC_AddCustomer uc = new UC_AddCustomer();
+            UC_AddCustomer uc = new UC_AddCustomer(conn);
             uc.Dock = DockStyle.Fill; // Cho full panel
             panelMain.Controls.Add(uc);
             uc.BringToFront();

@@ -9,12 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Oracle.ManagedDataAccess.Client; 
 
 namespace QL_PHONGGYM
 {
     public partial class Login : Form
+
     {
+        OracleConnection conn = null;
         public Login()
         {
             InitializeComponent();
@@ -57,11 +58,10 @@ namespace QL_PHONGGYM
                 try
                 {
                     string EncrypPassword = MaHoa.MaHoaNhan(password, 23);
-                    var conn = userDAL.LoginUser(userName, EncrypPassword);
+                    conn = userDAL.LoginUser(userName, EncrypPassword);
 
                     MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 👉 Tạo và hiển thị form Home full màn hình
                     Home home = new Home(userName, conn);
                     home.WindowState = FormWindowState.Maximized;  // full màn hình
                     this.Hide();                                   // ẩn form login
@@ -69,6 +69,7 @@ namespace QL_PHONGGYM
                 }
                 catch (OracleException ex)
                 {
+
                     if (ex.Number == 2391)
                         MessageBox.Show("Tài khoản của bạn đã bị đăng nhập ở nơi khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     else if (ex.Number == 1017) // ORA-01017: invalid username/password
