@@ -160,6 +160,9 @@ namespace QL_PHONGGYM.All_User_Control
             }
         }
 
-      
+        private void txt_tenkh_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -63,5 +63,23 @@ namespace QL_PHONGGYM
             uC_AddCustomer1.Visible = false;
             btn_add.PerformClick();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btn_employee_Click(object sender, EventArgs e)
+        {
+            panelmoving.Left = btn_employee.Left;
+
+            panelMain.Controls.Clear(); // Xóa nội dung panel hiện tại
+
+            UC_Employee uc = new UC_Employee(conn); // Tạo mới giao diện nhân viên
+            uc.Dock = DockStyle.Fill; // Chiếm toàn bộ vùng panelMain
+            panelMain.Controls.Add(uc);
+            uc.BringToFront();
+
+        }
     }
 }
