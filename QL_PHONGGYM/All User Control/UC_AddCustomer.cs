@@ -93,16 +93,14 @@ namespace QL_PHONGGYM.All_User_Control
 
         private void btn_addkh_Click(object sender, EventArgs e)
         {
-
             DateTime ngaySinh = dtp_ngaysinh.Value;
-            // 2. Kiểm tra và lấy Mã Loại Khách Hàng (ComboBox)
+
             if (txt_loaikh.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng chọn Loại Khách Hàng.", "Lỗi nhập liệu");
                 return;
             }
 
-            // CHUYỂN ĐỔI MÃ LOẠI KHÁCH HÀNG SANG INT
             int maLoaiKH;
             if (!int.TryParse(txt_loaikh.SelectedValue.ToString(), out maLoaiKH))
             {
@@ -110,29 +108,30 @@ namespace QL_PHONGGYM.All_User_Control
                 return;
             }
 
-            // 3. Gọi hàm Insert từ lớp AddData
-            bool success = dataWriter.InsertNewCustomer(
-             conn,
-             txt_tenkh.Text.Trim(),
-             txt_gioitinh.Text, // Lấy giá trị 'Nam'/'Nữ' từ ComboBox
-             ngaySinh,
-             txt_sdt.Text.Trim(),
-             txt_email.Text.Trim(),
-             maLoaiKH
-         );
+            int? maKHMoi = dataWriter.InsertNewCustomer(
+                 conn,
+                 txt_tenkh.Text.Trim(),
+                 txt_gioitinh.Text,
+                 ngaySinh,
+                 txt_sdt.Text.Trim(),
+                 txt_email.Text.Trim(),
+                 maLoaiKH
+             );
 
-            // 4. Cập nhật giao diện
-            if (success)
+            if (maKHMoi != null)
             {
                 MessageBox.Show("Thêm khách hàng thành công!", "Thông báo");
+                string tenKHMoi = txt_tenkh.Text.Trim();
                 LoadKhachHangGrid();
-                 ClearInputFields(); 
+                ClearInputFields();                
+
+                TaoHoaDon hd = new TaoHoaDon(maKHMoi.Value, tenKHMoi, conn);
+                hd.ShowDialog();
             }
         }
 
         private void ClearInputFields()
         {
-            // Xóa nội dung các TextBox
             txt_tenkh.Clear();
             txt_sdt.Clear();
             txt_email.Clear();
@@ -151,7 +150,6 @@ namespace QL_PHONGGYM.All_User_Control
             txt_tenkh.Focus();
         }
 
-        // Đảm bảo đóng kết nối khi Form đóng
         private void Home_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (conn != null && conn.State == ConnectionState.Open)

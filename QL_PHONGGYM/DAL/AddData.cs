@@ -10,15 +10,28 @@ namespace QL_PHONGGYM.DAL
 {
     public class AddData
     {
+        public void TaoHoaDon(OracleConnection conn, int maKH, decimal tongTien, decimal giamGia = 0)
+        {
+            using (var cmd = new OracleCommand("ADMIN123.sp_LapHoaDon", conn))
+            {
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("p_MaKH", OracleDbType.Int32).Value = maKH;
+                cmd.Parameters.Add("p_TongTien", OracleDbType.Decimal).Value = tongTien;
+                cmd.Parameters.Add("p_GiamGia", OracleDbType.Decimal).Value = giamGia;
 
-        public bool InsertNewCustomer(
-             OracleConnection conn,
-             string tenKhachHang,
-             string gioiTinh,
-             DateTime ngaySinh,
-             string soDienThoai,
-             string email,
-             int maLoaiKhachHang)
+                if (conn.State != ConnectionState.Open) conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+        }
+
+        public int? InsertNewCustomer(
+                 OracleConnection conn,
+                 string tenKhachHang,
+                 string gioiTinh,
+                 DateTime ngaySinh,
+                 string soDienThoai,
+                 string email,
+                 int maLoaiKhachHang)
         {
             try
             {
@@ -26,34 +39,40 @@ namespace QL_PHONGGYM.DAL
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    // Tham số p_TenKH NVARCHAR2
                     cmd.Parameters.Add("p_TenKH", OracleDbType.NVarchar2).Value = tenKhachHang;
-
-                    // Tham số p_GioiTinh NVARCHAR2
                     cmd.Parameters.Add("p_GioiTinh", OracleDbType.NVarchar2).Value = gioiTinh;
-
-                    // Tham số p_NgaySinh DATE
                     cmd.Parameters.Add("p_NgaySinh", OracleDbType.Date).Value = ngaySinh;
 
-                    // Tham số p_SDT NVARCHAR2
-                    cmd.Parameters.Add("p_SDT", OracleDbType.NVarchar2).Value = soDienThoai;
+                    cmd.Parameters.Add("p_SDT", OracleDbType.NVarchar2).Value =
+                        string.IsNullOrEmpty(soDienThoai) ? (object)DBNull.Value : soDienThoai;
 
-                    // Tham số p_Email NVARCHAR2
-                    cmd.Parameters.Add("p_Email", OracleDbType.NVarchar2).Value = email;
+                    cmd.Parameters.Add("p_Email", OracleDbType.NVarchar2).Value =
+                        string.IsNullOrEmpty(email) ? (object)DBNull.Value : email;
 
-                    // Tham số p_MaLoaiKH INT
                     cmd.Parameters.Add("p_MaLoaiKH", OracleDbType.Int32).Value = maLoaiKhachHang;
+
+                    var p_MaKHMoi = new OracleParameter("p_MaKHMoi_out", OracleDbType.Int32, ParameterDirection.Output);
+                    cmd.Parameters.Add(p_MaKHMoi);
 
                     if (conn.State != ConnectionState.Open) conn.Open();
                     cmd.ExecuteNonQuery();
 
-                    return true;
+                    try
+                    {
+                        int maKHMoi = Convert.ToInt32(p_MaKHMoi.Value.ToString());
+                        return maKHMoi;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Không thể lấy Mã Khách Hàng mới trả về.", "Lỗi Parameter", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return null;
+                    }
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi thêm khách hàng: " + ex.Message, "Lỗi Database", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                return null;
             }
         }
     }

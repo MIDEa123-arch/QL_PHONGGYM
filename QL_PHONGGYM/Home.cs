@@ -81,5 +81,17 @@ namespace QL_PHONGGYM
             uc.BringToFront();
 
         }
+
+        private void print_hoaDon_Click(object sender, EventArgs e)
+        {
+            XuatHoaDon xhd = new XuatHoaDon(conn);
+            xhd.Show();
+        }
+
+        private void btn_xemHd_Click(object sender, EventArgs e)
+        {
+            XemHoaDon xemhd = new XemHoaDon();
+            xemhd.Show();
+        }
     }
 }
